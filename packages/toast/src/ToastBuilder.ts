@@ -1,3 +1,4 @@
+import { TYPES } from './constants'
 import { ToastType } from './types'
 
 interface ToastElementParts {
@@ -33,5 +34,19 @@ export class ToastBuilder {
     const messageEL = document.createElement('div')
     messageEL.className = 'ui-toast-message'
     return { container, message: messageEL }
+  }
+
+  private static applyBaseClasses(container: HTMLElement, options: BuildOptions): void {
+    container.classList.add('ui-toast')
+    if (options.type !== TYPES.DEFAULT) {
+      container.classList.add(options.type)
+    }
+  }
+
+  private static applyCustomClasses(container: HTMLElement, options: BuildOptions): void {
+    if (options.className) {
+      const customClasses = options.className.split(' ').filter(c => c.trim())
+      customClasses.forEach(cls => container.classList.add(cls))
+    }
   }
 }
