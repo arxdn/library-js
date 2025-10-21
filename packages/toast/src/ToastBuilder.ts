@@ -19,8 +19,16 @@ interface BuildOptions {
 }
 
 export class ToastBuilder {
-  static build(): HTMLElement {
+  static build(id: string, message: string, options: BuildOptions): HTMLElement {
     const container = document.createElement('div')
+    const parts = this.createContainer(id, options, container)
+    this.applyBaseClasses(container, options)
+    this.applyCustomClasses(container, options)
+    this.applyAccessibility(container, options)
+    this.appendIcon(parts, options)
+    this.appendMessage(parts, message)
+    this.appendCloseButton(parts, options, id)
+    this.appendProgressBar(parts, options)
     return container
   }
 
