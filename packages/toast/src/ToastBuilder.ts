@@ -51,6 +51,11 @@ export class ToastBuilder {
     }
   }
 
+  private static applyAccessibility(container: HTMLElement, options: BuildOptions): void {
+    container.setAttribute('role', options.type === TYPES.ERROR ? 'alert' : 'status')
+    container.setAttribute('aria-live', options.type === TYPES.ERROR ? 'assertive' : 'polite')
+  }
+
   private static appendIcon(parts: ToastElementParts, options: BuildOptions): void {
     if (options.icon) {
       const iconEl = document.createElement('span')
