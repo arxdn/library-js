@@ -66,4 +66,27 @@ export class ToastBuilder {
       parts.container.appendChild(iconEl)
     }
   }
+
+  private static appendMessage(parts: ToastElementParts, message: string): void {
+    parts.message.textContent = message
+    parts.container.appendChild(parts.message)
+  }
+
+  private static appendCloseButton(
+    parts: ToastElementParts,
+    options: BuildOptions,
+    id: string
+  ): void {
+    if (options.dismissible) {
+      const closeBtn = document.createElement('button')
+      closeBtn.className = 'ui-toast-close'
+      closeBtn.innerHTML = '×'
+      closeBtn.setAttribute('aria-label', 'Close notification')
+      closeBtn.addEventListener('click', () => {
+        window.dispatchEvent(new CustomEvent('toast:dismiss', { detail: { id } }))
+      })
+      parts.closeButton = closeBtn
+      parts.container.appendChild(closeBtn)
+    }
+  }
 }
