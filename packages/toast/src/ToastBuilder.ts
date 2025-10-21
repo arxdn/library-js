@@ -94,4 +94,14 @@ export class ToastBuilder {
       parts.container.appendChild(closeBtn)
     }
   }
+
+  private static appendProgressBar(parts: ToastElementParts, options: BuildOptions): void {
+    if (options.duration > 0) {
+      const progress = document.createElement('div')
+      progress.className = 'ui-toast-progress'
+      progress.style.width = '100%'
+      parts.progressBar = progress
+      parts.container.appendChild(progress)
+    }
+  }
 }
