@@ -30,4 +30,19 @@ export class ToastManager {
     this.containers = new Map()
     this.cleanupFns = new Map()
   }
+
+  getContainer(position: Position): HTMLElement {
+    const existing = this.containers.get(position)
+    if (existing) {
+      return existing
+    }
+
+    const container = document.createElement('div')
+    container.className = `ui-toast-container ${position}`
+    container.setAttribute('data-position', position)
+    document.body.appendChild(container)
+    this.containers.set(position, container)
+
+    return container
+  }
 }
