@@ -30,6 +30,15 @@ export class ToastManager {
     this.toasts = new Map()
     this.containers = new Map()
     this.cleanupFns = new Map()
+    this.initEventListeners()
+  }
+
+  private initEventListeners(): void {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('toast:dismiss', ((e: CustomEvent<{ id: string }>) => {
+        this.dismiss(e.detail.id)
+      }) as EventListener)
+    }
   }
 
   getContainer(position: Position): HTMLElement {
