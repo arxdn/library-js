@@ -1,4 +1,5 @@
-import { Position, ToastInstance, ToastType } from './types'
+import { DEFAULT_OPTIONS } from './constants'
+import { Position, ToastInstance, ToastOptions, ToastType } from './types'
 
 interface CleanupFn {
   (): void
@@ -44,5 +45,18 @@ export class ToastManager {
     this.containers.set(position, container)
 
     return container
+  }
+
+  private resolveOptions(options: ToastOptions): ResolvedOptions {
+    return {
+      duration: options.duration ?? DEFAULT_OPTIONS.duration,
+      position: options.position ?? DEFAULT_OPTIONS.position,
+      type: (options.type ?? DEFAULT_OPTIONS.type) as ToastType,
+      dismissible: options.dismissible ?? DEFAULT_OPTIONS.dismissible,
+      pauseOnHover: options.pauseOnHover ?? DEFAULT_OPTIONS.pauseOnHover,
+      className: options.className ?? DEFAULT_OPTIONS.className,
+      icon: options.icon ?? DEFAULT_OPTIONS.icon,
+      onDismiss: options.onDismiss ?? null,
+    }
   }
 }
