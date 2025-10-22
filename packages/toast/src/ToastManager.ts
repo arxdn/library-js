@@ -59,4 +59,26 @@ export class ToastManager {
       onDismiss: options.onDismiss ?? null,
     }
   }
+
+  dismiss(id: string): void {
+    const entry = this.toasts.get(id)
+    if (!entry) {
+      return
+    }
+
+    const { instance } = entry
+
+    instance.element.remove()
+    this.toasts.delete(id)
+    this.cleanupFns.delete(id)
+
+    const position = instance.options.position
+    if (position) {
+      const container = this.containers.get(position)
+      if (container && container.children.length === 0) {
+        container.remove()
+        this.containers.delete(position)
+      }
+    }
+  }
 }
