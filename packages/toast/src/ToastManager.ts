@@ -174,20 +174,30 @@ export class ToastManager {
       return
     }
 
-    const { instance } = entry
-
-    instance.element.remove()
-    this.toasts.delete(id)
+    const { instance, cleanup } = entry
+    cleanup()
     this.cleanupFns.delete(id)
 
-    const position = instance.options.position
-    if (position) {
-      const container = this.containers.get(position)
-      if (container && container.children.length === 0) {
-        container.remove()
-        this.containers.delete(position)
+    instance.element.classList.remove('show')
+    instance.element.classList.add('hiding')
+
+    setTimeout(() => {
+      instance.element.remove()
+      this.toasts.delete(id)
+
+      const position = instance.options.position
+      if (position) {
+        const container = this.containers.get(position)
+        if (container && container.children.length === 0) {
+          container.remove()
+          this.containers.delete(position)
+        }
       }
-    }
+
+      if (instance.options.onDismiss) {
+        instance.options.onDismiss(instance)
+      }
+    }, 300)
   }
 
   update(id: string, newMessage: string, newOptions?: ToastOptions): void {
