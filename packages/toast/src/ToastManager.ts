@@ -97,6 +97,69 @@ export class ToastManager {
     }
   }
 
+  private setupAutoDismiss(id: string, instance: ToastInstance): CleanupFn {
+    const { element, options } = instance
+    const progressBar = element.querySelector('.ui-toast-progress') as HTMLElement
+    const toastOptions = options as unknown as ResolvedOptions
+
+    let startTime = Date.now()
+    let remainingTime = toastOptions.duration
+    let timeoutId: ReturnType<typeof setTimeout> | null = null
+    let animationId: number | null = null
+
+    const startTimer = (): void => {
+      startTime = Date.now()
+
+      timeoutId = setTimeout(() => {
+        this.dismiss(id)
+      }, remainingTime)
+
+      if (progressBar) {
+        const animate = (): void => {
+          const elapsed = Date.now() - startTime
+          const percentage = Math.max(0, 100 - (elapsed / toastOptions.duration) * 100)
+          progressBar.style.width = `${percentage}%`
+
+          if (percentage > 0) {
+            animationId = requestAnimationFrame(animate)
+          }
+        }
+        animate()
+      }
+    }
+
+    const pauseTimer = (): void => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+        timeoutId = null
+      }
+      if (animationId) {
+        cancelAnimationFrame(animationId)
+        animationId = null
+      }
+      const elapsed = Date.now() - startTime
+      remainingTime -= elapsed
+    }
+
+    if (toastOptions.pauseOnHover) {
+      element.addEventListener('mouseenter', pauseTimer)
+      element.addEventListener('mouseleave', startTimer)
+    }
+
+    startTimer()
+
+    const cleanup = (): void => {
+      if (timeoutId) clearTimeout(timeoutId)
+      if (animationId) cancelAnimationFrame(animationId)
+      element.removeEventListener('mouseenter', pauseTimer)
+      element.removeEventListener('mouseleave', startTimer)
+    }
+
+    this.cleanupFns.set(id, cleanup)
+
+    return cleanup
+  }
+
   dismiss(id: string): void {
     const entry = this.toasts.get(id)
     if (!entry) {
