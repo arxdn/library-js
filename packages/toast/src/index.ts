@@ -1,7 +1,11 @@
-import { ToastManager } from './ToastManager'
-import type { ToastOptions } from './types'
+export type { Position, ToastType, ToastOptions, ToastInstance } from './types'
+export { ToastManager, toastManager } from './ToastManager'
+export { ToastBuilder } from './ToastBuilder'
+export { POSITIONS, TYPES, DEFAULT_OPTIONS } from './constants'
+export { getDefaultIcon } from './helpers'
 
-export const toastManager = new ToastManager()
+import { toastManager } from './ToastManager'
+import type { ToastOptions } from './types'
 
 export const toast = {
   success: (message: string, options?: ToastOptions) =>
@@ -25,3 +29,5 @@ export const toast = {
   update: toastManager.update.bind(toastManager),
   getAll: toastManager.getAll.bind(toastManager),
 }
+
+export default toast
