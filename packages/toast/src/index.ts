@@ -18,4 +18,10 @@ export const toast = {
 
   default: (message: string, options?: ToastOptions) =>
     toastManager.create(message, { ...options, type: 'default' }),
+
+  create: toastManager.create.bind(toastManager),
+  dismiss: toastManager.dismiss.bind(toastManager),
+  dismissAll: toastManager.dismissAll.bind(toastManager),
+  update: toastManager.update.bind(toastManager),
+  getAll: toastManager.getAll.bind(toastManager),
 }
