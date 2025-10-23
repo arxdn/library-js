@@ -234,3 +234,5 @@ export class ToastManager {
     ids.forEach(id => this.dismiss(id))
   }
 }
+
+export const toastManager = new ToastManager()
