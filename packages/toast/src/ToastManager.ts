@@ -1,5 +1,7 @@
+import { generateId } from '@arxdn/shared'
 import { DEFAULT_OPTIONS } from './constants'
 import { Position, ToastInstance, ToastOptions, ToastType } from './types'
+import { ToastBuilder } from './ToastBuilder'
 
 interface CleanupFn {
   (): void
@@ -56,6 +58,32 @@ export class ToastManager {
     return container
   }
 
+  create(message: string, options: ToastOptions = {}): ToastInstance {
+    const id = generateId({ prefix: 'toast' })
+    const config = this.resolveOptions(options)
+    const element = ToastBuilder.build(id, message, config)
+    const container = this.getContainer(config.position)
+    container.appendChild(element)
+
+    const instance: ToastInstance = {
+      id,
+      message,
+      options: config as ToastOptions,
+      element,
+      dismiss: () => this.dismiss(id),
+      update: (newMessage: string, newOptions?: ToastOptions) =>
+        this.update(id, newMessage, newOptions),
+    }
+
+    this.toasts.set(id, { instance, cleanup: () => {} })
+
+    requestAnimationFrame(() => {
+      element.classList.add('show')
+    })
+
+    return instance
+  }
+
   private resolveOptions(options: ToastOptions): ResolvedOptions {
     return {
       duration: options.duration ?? DEFAULT_OPTIONS.duration,
@@ -99,7 +127,6 @@ export class ToastManager {
 
     const { instance } = entry
 
-    // Actualizar mensaje
     if (newMessage) {
       const messageEl = instance.element.querySelector('.ui-toast-message')
       if (messageEl) {
@@ -108,7 +135,6 @@ export class ToastManager {
       instance.message = newMessage
     }
 
-    // Actualizar opciones
     if (newOptions) {
       if (newOptions.className) {
         instance.element.className = `ui-toast ${newOptions.className}`
