@@ -90,4 +90,31 @@ export class ToastManager {
       }
     }
   }
+
+  update(id: string, newMessage: string, newOptions?: ToastOptions): void {
+    const entry = this.toasts.get(id)
+    if (!entry) {
+      return
+    }
+
+    const { instance } = entry
+
+    // Actualizar mensaje
+    if (newMessage) {
+      const messageEl = instance.element.querySelector('.ui-toast-message')
+      if (messageEl) {
+        messageEl.textContent = newMessage
+      }
+      instance.message = newMessage
+    }
+
+    // Actualizar opciones
+    if (newOptions) {
+      if (newOptions.className) {
+        instance.element.className = `ui-toast ${newOptions.className}`
+      }
+
+      Object.assign(instance.options, newOptions)
+    }
+  }
 }
