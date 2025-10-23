@@ -214,4 +214,13 @@ export class ToastManager {
       Object.assign(instance.options, newOptions)
     }
   }
+
+  getAll(): ToastInstance[] {
+    return Array.from(this.toasts.values()).map(entry => entry.instance)
+  }
+
+  dismissAll(): void {
+    const ids = Array.from(this.toasts.keys())
+    ids.forEach(id => this.dismiss(id))
+  }
 }
