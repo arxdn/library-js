@@ -81,6 +81,14 @@ export class ToastManager {
       element.classList.add('show')
     })
 
+    if (config.duration > 0) {
+      const cleanup = this.setupAutoDismiss(id, instance)
+      const entry = this.toasts.get(id)
+      if (entry) {
+        entry.cleanup = cleanup
+      }
+    }
+
     return instance
   }
 
