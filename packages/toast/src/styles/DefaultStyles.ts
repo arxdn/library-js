@@ -55,16 +55,11 @@ export const DEFAULT_THEME: ToastThemeConfig = {
 }
 
 export const BASE_STYLES = {
-  borderRadius: '8px',
   fontSize: '14px',
   fontFamily: 'system-ui, -apple-system, sans-serif',
-  padding: '12px 16px',
   margin: '8px',
   maxWidth: '350px',
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
   zIndex: '9999',
-  background: '#ffffff',
-  color: '#374151',
 } as const
 
 export const POSITIONS = {

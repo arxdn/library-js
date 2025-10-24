@@ -22,7 +22,7 @@ export class StyleManager {
 
   private static generateStyles(): string {
     return `
-/* Toast Default Styles */
+/* Toast Container Styles - Solo posición y z-index */
 .ui-toast-container {
   position: fixed;
   z-index: ${BASE_STYLES.zIndex};
@@ -44,26 +44,21 @@ ${Object.entries(POSITIONS)
   )
   .join('\n')}
 
+/* Toast Base Styles - Solo estructura básica */
 .ui-toast {
   display: flex;
   align-items: center;
   gap: 8px;
   font-family: ${BASE_STYLES.fontFamily};
   font-size: ${BASE_STYLES.fontSize};
-  background: ${BASE_STYLES.background};
-  color: ${BASE_STYLES.color};
-  padding: ${BASE_STYLES.padding};
   margin: ${BASE_STYLES.margin};
   max-width: ${BASE_STYLES.maxWidth};
-  border-radius: ${BASE_STYLES.borderRadius};
-  box-shadow: ${BASE_STYLES.boxShadow};
   opacity: 0;
   transform: translateY(-20px);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   word-wrap: break-word;
-  border: 1px solid transparent;
 }
 
 .ui-toast.show {
@@ -112,7 +107,6 @@ ${Object.entries(POSITIONS)
 
 .ui-toast-close:hover {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.1);
 }
 
 .ui-toast-progress {
@@ -120,39 +114,8 @@ ${Object.entries(POSITIONS)
   bottom: 0;
   left: 0;
   height: 3px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.1);
   transition: width linear;
-}
-
-/* Toast Type Styles */
-.ui-toast.success:not([class*="bg-"]):not([class*="background-"]) {
-  background: ${DEFAULT_THEME.success.background};
-  color: ${DEFAULT_THEME.success.color};
-  border: ${DEFAULT_THEME.success.border};
-}
-
-.ui-toast.error:not([class*="bg-"]):not([class*="background-"]) {
-  background: ${DEFAULT_THEME.error.background};
-  color: ${DEFAULT_THEME.error.color};
-  border: ${DEFAULT_THEME.error.border};
-}
-
-.ui-toast.warning:not([class*="bg-"]):not([class*="background-"]) {
-  background: ${DEFAULT_THEME.warning.background};
-  color: ${DEFAULT_THEME.warning.color};
-  border: ${DEFAULT_THEME.warning.border};
-}
-
-.ui-toast.info:not([class*="bg-"]):not([class*="background-"]) {
-  background: ${DEFAULT_THEME.info.background};
-  color: ${DEFAULT_THEME.info.color};
-  border: ${DEFAULT_THEME.info.border};
-}
-
-.ui-toast.default:not([class*="bg-"]):not([class*="background-"]) {
-  background: ${DEFAULT_THEME.default.background};
-  color: ${DEFAULT_THEME.default.color};
-  border: ${DEFAULT_THEME.default.border};
 }
 
 /* Responsive design */

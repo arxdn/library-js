@@ -1,6 +1,6 @@
 {
   "name": "@arxdn/toast",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Modern and customizable toast notification system",
   "private": false,
   "author": "Armando Rios",

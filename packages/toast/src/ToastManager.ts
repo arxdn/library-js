@@ -221,7 +221,17 @@ export class ToastManager {
 
     if (newOptions) {
       if (newOptions.className) {
-        instance.element.className = `ui-toast ${newOptions.className}`
+        const existingClasses = Array.from(instance.element.classList)
+        const baseClasses = existingClasses.filter(
+          cls =>
+            cls === 'ui-toast' ||
+            cls === 'ui-toast-icon' ||
+            cls === 'ui-toast-message' ||
+            cls === 'ui-toast-close' ||
+            cls === 'ui-toast-progress'
+        )
+        const newClasses = newOptions.className.split(' ').filter(c => c.trim())
+        instance.element.className = [...baseClasses, ...newClasses].join(' ')
       }
 
       Object.assign(instance.options, newOptions)
