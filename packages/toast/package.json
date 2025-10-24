@@ -1,7 +1,22 @@
 {
   "name": "@arxdn/toast",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "description": "Modern and customizable toast notification system",
   "private": false,
+  "author": "Armando Rios",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arxdn/library-js.git",
+    "directory": "packages/toast"
+  },
+  "keywords": [
+    "toast",
+    "notification",
+    "javascript",
+    "typescript",
+    "ui"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

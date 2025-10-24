@@ -1,7 +1,22 @@
 {
   "name": "@arxdn/library-js",
+  "version": "1.0.0",
+  "description": "Monorepo for JavaScript libraries from ARXDN",
   "private": true,
   "type": "module",
+  "author": "Armando Rios",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arxdn/library-js.git"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "toast",
+    "utilities",
+    "shared"
+  ],
   "workspaces": [
     "packages/*",
     "shared"
@@ -9,9 +24,13 @@
   "scripts": {
     "build": "npm run build --workspace=shared && npm run build --workspaces --exclude=shared",
     "test": "npm run test --workspaces",
+    "test:run": "npm run test:run --workspaces",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
-    "typecheck": "npm run typecheck --workspaces"
+    "typecheck": "npm run typecheck --workspaces",
+    "clean": "npm run clean --workspaces && rm -rf node_modules",
+    "dev": "npm run dev --workspaces --parallel",
+    "publish": "npm run build && npm run publish --workspaces --exclude=shared"
   },
   "devDependencies": {
     "@types/node": "^22.10.6",
