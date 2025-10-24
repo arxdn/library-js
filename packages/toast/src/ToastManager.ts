@@ -2,6 +2,7 @@ import { generateId } from '@arxdn/shared'
 import { DEFAULT_OPTIONS } from './constants'
 import { Position, ToastInstance, ToastOptions, ToastType } from './types'
 import { ToastBuilder } from './ToastBuilder'
+import { StyleManager } from './styles/StyleManager'
 
 interface CleanupFn {
   (): void
@@ -59,6 +60,8 @@ export class ToastManager {
   }
 
   create(message: string, options: ToastOptions = {}): ToastInstance {
+    StyleManager.injectDefaultStyles()
+
     const id = generateId({ prefix: 'toast' })
     const config = this.resolveOptions(options)
     const element = ToastBuilder.build(id, message, config)
