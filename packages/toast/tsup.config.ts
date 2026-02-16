@@ -8,4 +8,5 @@ export default defineConfig({
   sourcemap: true,
   minify: false,
   external: [],
+  noExternal: ['@arxdn/shared'],
 })
