@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Header from '../components/common/Header.astro'
+import Footer from '../components/common/Footer.astro'
+import Hero from '../components/features/home/Hero.astro'
+import LibraryCard from '../components/features/home/LibraryCard.astro'
+import Features from '../components/features/home/Features.astro'
+import { libraries } from '../content/libraries'
+import { buildOrganizationSchema } from '../seo/jsonld'
+
+const jsonLd = buildOrganizationSchema()
+---
+
+<BaseLayout
+  title="ARXDN — Lightweight JavaScript & TypeScript Libraries"
+  description="Open-source JavaScript and TypeScript libraries. Zero dependencies, fully typed, built for modern web development."
+  keywords={['javascript libraries', 'typescript libraries', 'open source', 'arxdn', 'lightweight utilities']}
+  jsonLd={jsonLd}
+>
+  <Header />
+
+  <main>
+    <Hero />
+
+    <section class="py-20">
+      <div class="mx-auto max-w-6xl px-6">
+        <h2 class="font-pixel mb-12 text-center text-lg sm:text-xl">
+          <span class="text-mauve">Our</span> Libraries
+        </h2>
+
+        <div class="mx-auto grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
+          {libraries.map(lib => <LibraryCard library={lib} />)}
+        </div>
+      </div>
+    </section>
+
+    <Features />
+  </main>
+
+  <Footer />
+</BaseLayout>
