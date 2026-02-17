@@ -1,0 +1,66 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+  canonical?: string
+  keywords?: string[]
+  jsonLd?: Record<string, unknown>
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og/home.png',
+  canonical,
+  keywords = [],
+  jsonLd,
+} = Astro.props
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? 'https://arxdn.com'
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href
+const ogImageUrl = new URL(ogImage, siteUrl).href
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="ARXDN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+
+    <!-- JSON-LD -->
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <!-- Per-page head content -->
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-base text-text">
+    <slot />
+  </body>
+</html>
