@@ -1,0 +1,33 @@
+:root {
+  /* Catppuccin Mocha base */
+  --color-base: #1e1e2e;
+  --color-mantle: #181825;
+  --color-crust: #11111b;
+  --color-surface-0: #313244;
+  --color-surface-1: #45475a;
+  --color-surface-2: #585b70;
+  --color-overlay-0: #6c7086;
+  --color-overlay-1: #7f849c;
+  --color-overlay-2: #9399b2;
+  --color-text: #cdd6f4;
+  --color-subtext-0: #a6adc8;
+  --color-subtext-1: #bac2de;
+
+  /* Accent palette */
+  --color-mauve: #cba6f7;
+  --color-pink: #f5c2e7;
+  --color-blue: #89b4fa;
+  --color-green: #a6e3a1;
+  --color-red: #f38ba8;
+  --color-yellow: #f9e2af;
+  --color-peach: #fab387;
+  --color-sky: #89dcfe;
+  --color-teal: #94e2d5;
+  --color-lavender: #b4befe;
+
+  /* Neon glows */
+  --glow-mauve: 0 0 10px #cba6f7, 0 0 40px rgba(203, 166, 247, 0.3);
+  --glow-pink: 0 0 10px #f5c2e7, 0 0 40px rgba(245, 194, 231, 0.3);
+  --glow-blue: 0 0 10px #89b4fa, 0 0 40px rgba(137, 180, 250, 0.3);
+  --glow-green: 0 0 10px #a6e3a1, 0 0 40px rgba(166, 227, 161, 0.3);
+}
