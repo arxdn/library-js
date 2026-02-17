@@ -2,29 +2,77 @@
 const links = [
   { label: 'Install', href: '#install' },
   { label: 'Quick Start', href: '#quick-start' },
-  { label: 'Features', href: '#features' },
-  { label: 'Why @arxdn/toast', href: '#why' },
   { label: 'Playground', href: '#playground' },
+  { label: 'Features', href: '#features' },
+  { label: 'Why', href: '#why' },
   { label: 'API', href: '#api' },
   { label: 'Options', href: '#options' },
 ]
 ---
 
-<nav class="pb-12">
-  <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-1">
-    <span class="text-xs text-subtext-1">On this page:</span>
-    {links.map((link, i) => (
-      <span class="flex items-center">
-        <a
-          href={link.href}
-          class="text-xs text-subtext-0 transition-colors hover:text-mauve"
-        >
-          {link.label}
-        </a>
-        {i < links.length - 1 && (
-          <span class="mx-1.5 hidden text-xs text-surface-1 sm:inline">&middot;</span>
-        )}
-      </span>
+<nav class="sticky top-14 z-40 border-b border-surface-0 bg-base/80 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-6 py-2 scrollbar-none">
+    {links.map(link => (
+      <a
+        href={link.href}
+        class="whitespace-nowrap rounded px-2.5 py-1 text-xs text-subtext-0 transition-colors hover:bg-surface-0/50 hover:text-mauve"
+        data-section-link
+      >
+        {link.label}
+      </a>
     ))}
   </div>
 </nav>
+
+<style>
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function initSectionNav(): void {
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-section-link]')
+    const sections = Array.from(links)
+      .map(link => {
+        const id = link.getAttribute('href')?.replace('#', '')
+        return id ? document.getElementById(id) : null
+      })
+      .filter((el): el is HTMLElement => el !== null)
+
+    if (sections.length === 0) return
+
+    const observer = new IntersectionObserver(
+      () => {
+        let activeId = ''
+        for (const section of sections) {
+          const rect = section.getBoundingClientRect()
+          if (rect.top <= 120) {
+            activeId = section.id
+          }
+        }
+
+        links.forEach(link => {
+          const href = link.getAttribute('href')
+          if (href === `#${activeId}`) {
+            link.classList.add('text-mauve', 'bg-surface-0/30')
+            link.classList.remove('text-subtext-0')
+          } else {
+            link.classList.remove('text-mauve', 'bg-surface-0/30')
+            link.classList.add('text-subtext-0')
+          }
+        })
+      },
+      { threshold: 0, rootMargin: '-80px 0px -60% 0px' }
+    )
+
+    sections.forEach(section => observer.observe(section))
+  }
+
+  initSectionNav()
+  document.addEventListener('astro:after-swap', initSectionNav)
+</script>
