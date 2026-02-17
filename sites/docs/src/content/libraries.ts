@@ -1,3 +1,12 @@
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
+
+function readPackageVersion(packageDir: string): string {
+  const pkgPath = resolve('../../packages', packageDir, 'package.json')
+  const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
+  return pkg.version
+}
+
 interface LibraryMeta {
   name: string
   slug: string
@@ -38,7 +47,7 @@ export const libraries: LibraryMeta[] = [
       'Full TypeScript support',
       'Accessible (ARIA)',
     ],
-    version: '1.1.0',
+    version: readPackageVersion('toast'),
     icon: '🍞',
   },
 ]
