@@ -1,0 +1,30 @@
+---
+const links = [
+  { label: 'Install', href: '#install' },
+  { label: 'Quick Start', href: '#quick-start' },
+  { label: 'Features', href: '#features' },
+  { label: 'Why @arxdn/toast', href: '#why' },
+  { label: 'Playground', href: '#playground' },
+  { label: 'API', href: '#api' },
+  { label: 'Options', href: '#options' },
+]
+---
+
+<nav class="pb-12">
+  <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-1">
+    <span class="text-xs text-subtext-1">On this page:</span>
+    {links.map((link, i) => (
+      <span class="flex items-center">
+        <a
+          href={link.href}
+          class="text-xs text-subtext-0 transition-colors hover:text-mauve"
+        >
+          {link.label}
+        </a>
+        {i < links.length - 1 && (
+          <span class="mx-1.5 hidden text-xs text-surface-1 sm:inline">&middot;</span>
+        )}
+      </span>
+    ))}
+  </div>
+</nav>
