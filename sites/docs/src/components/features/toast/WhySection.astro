@@ -1,0 +1,39 @@
+---
+const points = [
+  {
+    lead: 'Zero dependencies',
+    description:
+      'Nothing extra to install. The entire library is self-contained with no transitive dependencies to audit or update.',
+  },
+  {
+    lead: 'Lightweight',
+    description:
+      'Minimal footprint. Ships both ESM and CJS builds so bundlers can tree-shake effectively.',
+  },
+  {
+    lead: 'SSR Safe',
+    description:
+      'Guards all browser API access behind environment checks. No window or document errors during server-side rendering.',
+  },
+  {
+    lead: 'Simple API',
+    description:
+      'One import, one function call. No providers, no context, no configuration files. Works immediately after install.',
+  },
+]
+---
+
+<section id="why" class="scroll-mt-20 pb-16">
+  <h2 class="font-pixel mb-6 text-sm text-mauve">Why @arxdn/toast</h2>
+
+  <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
+    <ul class="flex flex-col gap-4">
+      {points.map(point => (
+        <li>
+          <span class="font-semibold text-text">{point.lead}</span>
+          <span class="text-subtext-0"> — {point.description}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

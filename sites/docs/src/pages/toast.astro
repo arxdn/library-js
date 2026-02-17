@@ -10,6 +10,7 @@ import Playground from '../components/features/toast/Playground'
 import TableOfContents from '../components/features/toast/TableOfContents.astro'
 import QuickStart from '../components/features/toast/QuickStart.astro'
 import FeatureList from '../components/features/toast/FeatureList.astro'
+import WhySection from '../components/features/toast/WhySection.astro'
 import { libraries } from '../content/libraries'
 import { buildSoftwareSchema } from '../seo/jsonld'
 
@@ -72,6 +73,9 @@ const jsonLd = buildSoftwareSchema(lib)
 
     <!-- Features -->
     <FeatureList />
+
+    <!-- Why @arxdn/toast -->
+    <WhySection />
 
     <!-- Interactive Playground -->
     <section id="playground" class="scroll-mt-20 pb-16">
