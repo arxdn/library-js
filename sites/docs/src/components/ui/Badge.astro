@@ -1,0 +1,21 @@
+---
+interface Props {
+  text: string
+  variant?: 'mauve' | 'pink' | 'blue' | 'green' | 'yellow' | 'red'
+}
+
+const { text, variant = 'mauve' } = Astro.props
+
+const variantClasses: Record<string, string> = {
+  mauve: 'border-mauve/30 bg-mauve/10 text-mauve',
+  pink: 'border-pink/30 bg-pink/10 text-pink',
+  blue: 'border-blue/30 bg-blue/10 text-blue',
+  green: 'border-green/30 bg-green/10 text-green',
+  yellow: 'border-yellow/30 bg-yellow/10 text-yellow',
+  red: 'border-red/30 bg-red/10 text-red',
+}
+---
+
+<span class:list={['inline-block rounded-full border px-3 py-1 text-xs font-medium', variantClasses[variant]]}>
+  {text}
+</span>

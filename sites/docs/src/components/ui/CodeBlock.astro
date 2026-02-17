@@ -1,0 +1,26 @@
+---
+interface Props {
+  code: string
+  lang?: string
+}
+
+const { code, lang = 'typescript' } = Astro.props
+---
+
+<div class="group relative">
+  <pre
+    class="overflow-x-auto rounded-lg border border-surface-0 bg-mantle p-4 font-mono text-sm leading-relaxed"
+  ><code class={`language-${lang}`} set:html={code} /></pre>
+
+  <button
+    class="absolute right-3 top-3 rounded border border-surface-1 bg-surface-0 px-2 py-1 text-xs text-subtext-0 opacity-0 transition-all hover:border-mauve hover:text-mauve group-hover:opacity-100"
+    data-code={code}
+    onclick="
+      navigator.clipboard.writeText(this.dataset.code);
+      this.textContent = 'Copied!';
+      setTimeout(() => this.textContent = 'Copy', 1500);
+    "
+  >
+    Copy
+  </button>
+</div>
