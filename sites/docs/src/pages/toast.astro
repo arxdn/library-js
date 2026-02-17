@@ -16,7 +16,7 @@ const jsonLd = buildSoftwareSchema(lib)
 
 <BaseLayout
   title="Toast — Lightweight Toast Notifications for JavaScript | ARXDN"
-  description={lib.description}
+  description="Lightweight, customizable toast notifications for JavaScript and TypeScript. Zero dependencies, fully typed, works with any framework or vanilla JS."
   ogImage={lib.ogImage}
   keywords={lib.keywords}
   canonical="https://arxdn.com/libraries/toast"
@@ -56,28 +56,28 @@ const jsonLd = buildSoftwareSchema(lib)
     </section>
 
     <!-- Install -->
-    <section class="pb-16">
-      <h2 class="font-pixel mb-4 text-sm text-mauve">INSTALL</h2>
+    <section id="install" class="scroll-mt-20 pb-16">
+      <h2 class="font-pixel mb-4 text-sm text-mauve">Install @arxdn/toast</h2>
       <InstallBlock packageName={lib.packageName} />
     </section>
 
     <!-- Interactive Playground -->
-    <section class="pb-16">
-      <h2 class="font-pixel mb-6 text-sm text-mauve">PLAYGROUND</h2>
+    <section id="playground" class="scroll-mt-20 pb-16">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">Interactive Playground</h2>
       <Playground client:visible />
     </section>
 
     <!-- API Reference -->
-    <section class="pb-16">
-      <h2 class="font-pixel mb-6 text-sm text-mauve">API METHODS</h2>
+    <section id="api" class="scroll-mt-20 pb-16">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">API Reference</h2>
       <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
         <ApiTable />
       </div>
     </section>
 
     <!-- Options Reference -->
-    <section class="pb-20">
-      <h2 class="font-pixel mb-6 text-sm text-mauve">OPTIONS</h2>
+    <section id="options" class="scroll-mt-20 pb-20">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">Configuration Options</h2>
       <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
         <OptionTable />
       </div>
