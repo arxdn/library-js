@@ -5,12 +5,61 @@ interface Props {
 }
 
 const { code, lang = 'typescript' } = Astro.props
+
+function highlight(source: string): string {
+  const escaped = source
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+
+  const tokens: string[] = []
+  const PH = (i: number): string => `__TK${i}TK__`
+  const PH_RE = /__TK(\d+)TK__/g
+
+  const withPlaceholders = escaped
+    .replace(/(\/\/.*)/g, (_match, comment) => {
+      const i = tokens.length
+      tokens.push(`<span class="text-overlay-1">${comment}</span>`)
+      return PH(i)
+    })
+    .replace(/'([^']*?)'/g, (_match, content) => {
+      const i = tokens.length
+      tokens.push(`<span class="text-green">'${content}'</span>`)
+      return PH(i)
+    })
+
+  const highlighted = withPlaceholders
+    .replace(
+      /\b(import|from|export|const|let|function|return|if|else|new|typeof)\b/g,
+      '<span class="text-pink">$1</span>',
+    )
+    .replace(
+      /\b(true|false|null|undefined)\b/g,
+      '<span class="text-peach">$1</span>',
+    )
+    .replace(
+      /\b(\d+)\b/g,
+      '<span class="text-peach">$1</span>',
+    )
+    .replace(
+      /\b(toast)\b/g,
+      '<span class="text-yellow">$1</span>',
+    )
+    .replace(
+      /\.(success|error|warning|info|default|create|dismiss|dismissAll|update|getAll)\b/g,
+      '.<span class="text-blue">$1</span>',
+    )
+
+  return highlighted.replace(PH_RE, (_match, i) => tokens[Number(i)])
+}
+
+const highlighted = highlight(code)
 ---
 
 <div class="group relative">
   <pre
     class="overflow-x-auto rounded-lg border border-surface-0 bg-mantle p-4 font-mono text-sm leading-relaxed"
-  ><code class={`language-${lang}`} set:html={code} /></pre>
+  ><code class={`language-${lang}`} set:html={highlighted} /></pre>
 
   <button
     class="absolute right-3 top-3 rounded border border-surface-1 bg-surface-0 px-2 py-1 text-xs text-subtext-0 opacity-0 transition-all hover:border-mauve hover:text-mauve group-hover:opacity-100"
