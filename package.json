@@ -1,6 +1,5 @@
 {
   "name": "@arxdn/library-js",
-  "version": "1.0.0",
   "description": "Monorepo for JavaScript libraries from ARXDN",
   "private": true,
   "type": "module",
@@ -19,10 +18,10 @@
   ],
   "workspaces": [
     "packages/*",
-    "shared"
+    "sites/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=shared && npm run build --workspaces --exclude=shared",
+    "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
     "test:run": "npm run test:run --workspaces",
     "lint": "eslint . --max-warnings=0",
@@ -33,16 +32,17 @@
     "publish": "npm run build && npm run publish --workspaces --exclude=shared"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.8",
     "@types/node": "^22.10.6",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "jsdom": "^24.0.0",
     "prettier": "^3.4.2",
     "tsup": "^8.4.0",
     "typescript": "^5.7.3",
-    "vitest": "^3.0.0",
-    "jsdom": "^24.0.0"
+    "vitest": "^3.0.0"
   }
 }
