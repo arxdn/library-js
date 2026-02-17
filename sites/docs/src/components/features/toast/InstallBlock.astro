@@ -1,0 +1,26 @@
+---
+interface Props {
+  packageName: string
+}
+
+const { packageName } = Astro.props
+const installCmd = `npm install ${packageName}`
+---
+
+<div class="group relative">
+  <div class="flex items-center overflow-hidden rounded-lg border border-surface-0 bg-mantle">
+    <span class="border-r border-surface-0 bg-surface-0/50 px-4 py-3 text-sm text-overlay-1">$</span>
+    <code class="flex-1 px-4 py-3 font-mono text-sm text-green">{installCmd}</code>
+    <button
+      class="border-l border-surface-0 px-4 py-3 text-sm text-subtext-0 transition-colors hover:bg-surface-0/50 hover:text-mauve"
+      data-code={installCmd}
+      onclick="
+        navigator.clipboard.writeText(this.dataset.code);
+        this.textContent = 'Copied!';
+        setTimeout(() => this.textContent = 'Copy', 1500);
+      "
+    >
+      Copy
+    </button>
+  </div>
+</div>

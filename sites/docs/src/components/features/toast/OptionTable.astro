@@ -1,0 +1,41 @@
+---
+const options = [
+  { name: 'type', type: "'success' | 'error' | 'warning' | 'info' | 'default'", default: "'default'", description: 'Visual style and icon of the toast' },
+  { name: 'position', type: "'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'", default: "'top-right'", description: 'Screen position of the toast container' },
+  { name: 'duration', type: 'number', default: '3000', description: 'Auto-dismiss time in milliseconds. 0 for persistent' },
+  { name: 'dismissible', type: 'boolean', default: 'true', description: 'Show close button on the toast' },
+  { name: 'pauseOnHover', type: 'boolean', default: 'true', description: 'Pause auto-dismiss timer when hovering' },
+  { name: 'className', type: 'string', default: "''", description: 'Custom CSS class(es) to apply to the toast' },
+  { name: 'icon', type: 'string', default: "''", description: 'Custom icon HTML to override the default' },
+  { name: 'onDismiss', type: '(instance) => void', default: 'null', description: 'Callback fired when the toast is dismissed' },
+]
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-surface-0 text-left">
+        <th class="pb-3 pr-4 font-semibold text-mauve">Option</th>
+        <th class="pb-3 pr-4 font-semibold text-mauve">Type</th>
+        <th class="pb-3 pr-4 font-semibold text-mauve">Default</th>
+        <th class="pb-3 font-semibold text-mauve">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {options.map(opt => (
+        <tr class="border-b border-surface-0/50 transition-colors hover:bg-surface-0/20">
+          <td class="py-3 pr-4">
+            <code class="font-mono text-xs text-pink">{opt.name}</code>
+          </td>
+          <td class="py-3 pr-4">
+            <code class="font-mono text-xs text-blue">{opt.type}</code>
+          </td>
+          <td class="py-3 pr-4">
+            <code class="font-mono text-xs text-yellow">{opt.default}</code>
+          </td>
+          <td class="py-3 text-subtext-0">{opt.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

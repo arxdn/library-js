@@ -1,0 +1,35 @@
+---
+const methods = [
+  { name: 'toast.success(message, options?)', description: 'Show a success toast with a checkmark icon' },
+  { name: 'toast.error(message, options?)', description: 'Show an error toast with an X icon' },
+  { name: 'toast.warning(message, options?)', description: 'Show a warning toast with a caution icon' },
+  { name: 'toast.info(message, options?)', description: 'Show an info toast with an info icon' },
+  { name: 'toast.default(message, options?)', description: 'Show a plain toast without a type icon' },
+  { name: 'toast.create(message, options)', description: 'Create a toast with full options control' },
+  { name: 'toast.dismiss(id)', description: 'Dismiss a specific toast by ID' },
+  { name: 'toast.dismissAll()', description: 'Dismiss all active toasts' },
+  { name: 'toast.update(id, message, options?)', description: 'Update an existing toast message and options' },
+  { name: 'toast.getAll()', description: 'Get an array of all active toast instances' },
+]
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full text-sm">
+    <thead>
+      <tr class="border-b border-surface-0 text-left">
+        <th class="pb-3 pr-6 font-semibold text-mauve">Method</th>
+        <th class="pb-3 font-semibold text-mauve">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {methods.map(method => (
+        <tr class="border-b border-surface-0/50 transition-colors hover:bg-surface-0/20">
+          <td class="py-3 pr-6">
+            <code class="font-mono text-xs text-green">{method.name}</code>
+          </td>
+          <td class="py-3 text-subtext-0">{method.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
