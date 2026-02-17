@@ -5,17 +5,29 @@
   "private": false,
   "author": "Armando Rios",
   "license": "MIT",
+  "homepage": "https://arxdn.com/libraries/toast",
   "repository": {
     "type": "git",
     "url": "https://github.com/arxdn/library-js.git",
     "directory": "packages/toast"
   },
+  "bugs": {
+    "url": "https://github.com/arxdn/library-js/issues"
+  },
   "keywords": [
     "toast",
     "notification",
+    "notifications",
     "javascript",
     "typescript",
-    "ui"
+    "ui",
+    "browser",
+    "lightweight",
+    "zero-dependencies",
+    "accessible",
+    "a11y",
+    "tailwind",
+    "css"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
