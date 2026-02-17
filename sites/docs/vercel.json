@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/libraries",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/libraries/:path*",
+      "destination": "/:path*"
+    }
+  ],
   "redirects": [
     {
       "source": "/",
