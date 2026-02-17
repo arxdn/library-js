@@ -1,0 +1,43 @@
+---
+import { libraries } from '../../content/libraries'
+
+const currentPath = Astro.url.pathname
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+
+<header class="sticky top-0 z-50 border-b border-surface-0 bg-base/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href={`${base}/`} class="font-pixel text-sm text-mauve transition-all hover:shadow-neon-mauve hover:drop-shadow-lg">
+      ARXDN
+    </a>
+
+    <ul class="flex items-center gap-6">
+      {libraries.map(lib => (
+        <li>
+          <a
+            href={`${base}/${lib.slug}`}
+            class:list={[
+              'text-sm font-medium transition-colors',
+              currentPath === `${base}/${lib.slug}` || currentPath === `${base}/${lib.slug}/`
+                ? 'text-mauve'
+                : 'text-subtext-0 hover:text-text',
+            ]}
+          >
+            {lib.name}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="https://github.com/arxdn/library-js"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-subtext-0 transition-colors hover:text-text"
+          aria-label="GitHub repository"
+        >
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
