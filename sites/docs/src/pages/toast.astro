@@ -9,6 +9,7 @@ import OptionTable from '../components/features/toast/OptionTable.astro'
 import Playground from '../components/features/toast/Playground'
 import TableOfContents from '../components/features/toast/TableOfContents.astro'
 import QuickStart from '../components/features/toast/QuickStart.astro'
+import FeatureList from '../components/features/toast/FeatureList.astro'
 import { libraries } from '../content/libraries'
 import { buildSoftwareSchema } from '../seo/jsonld'
 
@@ -68,6 +69,9 @@ const jsonLd = buildSoftwareSchema(lib)
 
     <!-- Quick Start -->
     <QuickStart />
+
+    <!-- Features -->
+    <FeatureList />
 
     <!-- Interactive Playground -->
     <section id="playground" class="scroll-mt-20 pb-16">

@@ -1,0 +1,57 @@
+---
+const features = [
+  {
+    title: 'Multiple Toast Types',
+    description:
+      'Success, error, warning, info, and default types. Each comes with a distinct icon to match the context of user feedback.',
+  },
+  {
+    title: 'Flexible Positioning',
+    description:
+      'Place toasts in any of six screen positions. Top or bottom, left, center, or right. Toasts stack automatically without overlapping.',
+  },
+  {
+    title: 'Pause on Hover',
+    description:
+      'Hovering a toast pauses its auto-dismiss timer, giving users time to read longer messages without rushing.',
+  },
+  {
+    title: 'Progress Bar',
+    description:
+      'A visual countdown shows remaining time before auto-dismiss. Users always know how long a toast will stay.',
+  },
+  {
+    title: 'Custom Styling',
+    description:
+      'Pass CSS classes to any toast via the className option. Full control over appearance without overriding defaults globally.',
+  },
+  {
+    title: 'Fully Typed',
+    description:
+      'Complete TypeScript definitions for every method, option, and return type. Autocomplete and type-checking work out of the box.',
+  },
+  {
+    title: 'Framework Agnostic',
+    description:
+      'Pure vanilla JavaScript with no framework dependencies. Works with React, Vue, Svelte, Angular, or plain HTML.',
+  },
+  {
+    title: 'Programmatic Control',
+    description:
+      'Create, update, dismiss, and query toasts via a simple API. Build complex notification flows with full lifecycle control.',
+  },
+]
+---
+
+<section id="features" class="scroll-mt-20 pb-16">
+  <h2 class="font-pixel mb-6 text-sm text-mauve">Features</h2>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {features.map(feature => (
+      <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-5 transition-all hover:border-surface-1">
+        <h3 class="mb-2 text-sm font-semibold text-text">{feature.title}</h3>
+        <p class="text-sm leading-relaxed text-subtext-0">{feature.description}</p>
+      </div>
+    ))}
+  </div>
+</section>
