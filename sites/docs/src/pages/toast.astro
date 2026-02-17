@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Header from '../components/common/Header.astro'
+import Footer from '../components/common/Footer.astro'
+import Badge from '../components/ui/Badge.astro'
+import InstallBlock from '../components/features/toast/InstallBlock.astro'
+import ApiTable from '../components/features/toast/ApiTable.astro'
+import OptionTable from '../components/features/toast/OptionTable.astro'
+import Playground from '../components/features/toast/Playground'
+import { libraries } from '../content/libraries'
+import { buildSoftwareSchema } from '../seo/jsonld'
+
+const lib = libraries.find(l => l.slug === 'toast')!
+const jsonLd = buildSoftwareSchema(lib)
+---
+
+<BaseLayout
+  title="Toast — Lightweight Toast Notifications for JavaScript | ARXDN"
+  description={lib.description}
+  ogImage={lib.ogImage}
+  keywords={lib.keywords}
+  canonical="https://arxdn.com/libraries/toast"
+  jsonLd={jsonLd}
+>
+  <script slot="head" is:inline src="https://cdn.tailwindcss.com"></script>
+  <script slot="head" is:inline>
+    tailwind.config = { corePlugins: { preflight: false } }
+  </script>
+  <Header />
+
+  <main class="mx-auto max-w-6xl px-6">
+    <!-- Hero -->
+    <section class="py-16 sm:py-20">
+      <div class="flex flex-col items-start gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <h1 class="font-pixel text-xl text-text sm:text-2xl lg:text-3xl">
+            <span class="text-mauve">@arxdn/</span>toast
+          </h1>
+          <Badge text={`v${lib.version}`} variant="green" />
+          <Badge text="MIT" variant="blue" />
+          <Badge text="0 deps" variant="yellow" />
+        </div>
+
+        <p class="max-w-2xl text-lg leading-relaxed text-subtext-0">
+          {lib.description}
+        </p>
+
+        <div class="mt-2 flex flex-wrap gap-2">
+          {lib.features.map(f => (
+            <span class="rounded-md border border-surface-0 bg-surface-0/30 px-2.5 py-1 text-xs text-subtext-1">
+              {f}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section class="pb-16">
+      <h2 class="font-pixel mb-4 text-sm text-mauve">INSTALL</h2>
+      <InstallBlock packageName={lib.packageName} />
+    </section>
+
+    <!-- Interactive Playground -->
+    <section class="pb-16">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">PLAYGROUND</h2>
+      <Playground client:visible />
+    </section>
+
+    <!-- API Reference -->
+    <section class="pb-16">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">API METHODS</h2>
+      <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
+        <ApiTable />
+      </div>
+    </section>
+
+    <!-- Options Reference -->
+    <section class="pb-20">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">OPTIONS</h2>
+      <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
+        <OptionTable />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
