@@ -1,0 +1,35 @@
+---
+import type { LibraryMeta } from '../../../content/libraries'
+import Badge from '../../ui/Badge.astro'
+
+interface Props {
+  library: LibraryMeta
+}
+
+const { library } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+
+<a
+  href={`${base}/${library.slug}`}
+  class="arcade-border group block rounded-lg border border-surface-0 bg-surface-0/30 p-6 transition-all hover:bg-surface-0/50"
+>
+  <div class="mb-4 flex items-center gap-3">
+    <span class="text-2xl">{library.icon}</span>
+    <h3 class="font-pixel text-sm text-text">{library.name}</h3>
+  </div>
+
+  <p class="mb-4 text-sm leading-relaxed text-subtext-0">
+    {library.shortDescription}
+  </p>
+
+  <div class="mb-4 flex flex-wrap gap-2">
+    <Badge text={library.packageName} variant="mauve" />
+    <Badge text={`v${library.version}`} variant="green" />
+  </div>
+
+  <div class="flex items-center gap-1 text-sm text-mauve opacity-0 transition-opacity group-hover:opacity-100">
+    <span>Learn more</span>
+    <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+  </div>
+</a>

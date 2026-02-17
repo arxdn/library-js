@@ -1,0 +1,48 @@
+---
+const features = [
+  {
+    title: 'Zero Dependencies',
+    description: 'No bloat. Each library is self-contained and lightweight.',
+    icon: '0',
+    color: 'text-green',
+  },
+  {
+    title: 'TypeScript First',
+    description: 'Full type safety with exported types and interfaces.',
+    icon: 'TS',
+    color: 'text-blue',
+  },
+  {
+    title: 'Dual Format',
+    description: 'Ships both ESM and CJS builds. Works everywhere.',
+    icon: '{}',
+    color: 'text-peach',
+  },
+  {
+    title: 'Tree-Shakeable',
+    description: 'Import only what you need. Dead code gets eliminated.',
+    icon: '>_',
+    color: 'text-pink',
+  },
+]
+---
+
+<section class="py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="font-pixel mb-12 text-center text-base text-lg sm:text-xl">
+      <span class="text-mauve">Why</span> ARXDN?
+    </h2>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {features.map(feature => (
+        <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6 transition-all hover:border-surface-1">
+          <div class={`font-pixel mb-4 text-xs ${feature.color}`}>
+            {feature.icon}
+          </div>
+          <h3 class="mb-2 text-sm font-semibold text-text">{feature.title}</h3>
+          <p class="text-sm leading-relaxed text-subtext-0">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
