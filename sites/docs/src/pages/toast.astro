@@ -31,6 +31,7 @@ const jsonLd = buildSoftwareSchema(lib)
     tailwind.config = { corePlugins: { preflight: false } }
   </script>
   <Header />
+  <TableOfContents />
 
   <main class="mx-auto max-w-6xl px-6">
     <!-- Hero -->
@@ -59,11 +60,8 @@ const jsonLd = buildSoftwareSchema(lib)
       </div>
     </section>
 
-    <!-- Table of Contents -->
-    <TableOfContents />
-
     <!-- Install -->
-    <section id="install" class="scroll-mt-20 pb-16">
+    <section id="install" class="scroll-mt-24 pb-16">
       <h2 class="font-pixel mb-4 text-sm text-mauve">Install @arxdn/toast</h2>
       <InstallBlock packageName={lib.packageName} />
     </section>
@@ -71,20 +69,20 @@ const jsonLd = buildSoftwareSchema(lib)
     <!-- Quick Start -->
     <QuickStart />
 
+    <!-- Interactive Playground -->
+    <section id="playground" class="scroll-mt-24 pb-16">
+      <h2 class="font-pixel mb-6 text-sm text-mauve">Interactive Playground</h2>
+      <Playground client:visible />
+    </section>
+
     <!-- Features -->
     <FeatureList />
 
     <!-- Why @arxdn/toast -->
     <WhySection />
 
-    <!-- Interactive Playground -->
-    <section id="playground" class="scroll-mt-20 pb-16">
-      <h2 class="font-pixel mb-6 text-sm text-mauve">Interactive Playground</h2>
-      <Playground client:visible />
-    </section>
-
     <!-- API Reference -->
-    <section id="api" class="scroll-mt-20 pb-16">
+    <section id="api" class="scroll-mt-24 pb-16">
       <h2 class="font-pixel mb-6 text-sm text-mauve">API Reference</h2>
       <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
         <ApiTable />
@@ -92,7 +90,7 @@ const jsonLd = buildSoftwareSchema(lib)
     </section>
 
     <!-- Options Reference -->
-    <section id="options" class="scroll-mt-20 pb-20">
+    <section id="options" class="scroll-mt-24 pb-20">
       <h2 class="font-pixel mb-6 text-sm text-mauve">Configuration Options</h2>
       <div class="rounded-lg border border-surface-0 bg-surface-0/20 p-6">
         <OptionTable />
