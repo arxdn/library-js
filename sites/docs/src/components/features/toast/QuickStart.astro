@@ -1,0 +1,43 @@
+---
+import CodeBlock from '../../ui/CodeBlock.astro'
+
+const basicUsage = `import { toast } from '@arxdn/toast'
+
+toast.success('Changes saved')
+toast.error('Something went wrong')
+toast.warning('Low disk space')
+toast.info('New update available')`
+
+const withOptions = `toast.success('Profile updated', {
+  duration: 5000,
+  position: 'bottom-center',
+  pauseOnHover: true
+})`
+
+const programmaticControl = `const id = toast.info('Uploading...', { duration: 0 })
+
+// Later...
+toast.update(id, 'Upload complete!')
+toast.dismiss(id)`
+---
+
+<section id="quick-start" class="scroll-mt-20 pb-16">
+  <h2 class="font-pixel mb-6 text-sm text-mauve">Quick Start</h2>
+
+  <div class="flex flex-col gap-6">
+    <div>
+      <h3 class="mb-3 text-sm font-medium text-subtext-1">Basic usage</h3>
+      <CodeBlock code={basicUsage} />
+    </div>
+
+    <div>
+      <h3 class="mb-3 text-sm font-medium text-subtext-1">With options</h3>
+      <CodeBlock code={withOptions} />
+    </div>
+
+    <div>
+      <h3 class="mb-3 text-sm font-medium text-subtext-1">Programmatic control</h3>
+      <CodeBlock code={programmaticControl} />
+    </div>
+  </div>
+</section>

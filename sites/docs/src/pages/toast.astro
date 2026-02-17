@@ -8,6 +8,7 @@ import ApiTable from '../components/features/toast/ApiTable.astro'
 import OptionTable from '../components/features/toast/OptionTable.astro'
 import Playground from '../components/features/toast/Playground'
 import TableOfContents from '../components/features/toast/TableOfContents.astro'
+import QuickStart from '../components/features/toast/QuickStart.astro'
 import { libraries } from '../content/libraries'
 import { buildSoftwareSchema } from '../seo/jsonld'
 
@@ -64,6 +65,9 @@ const jsonLd = buildSoftwareSchema(lib)
       <h2 class="font-pixel mb-4 text-sm text-mauve">Install @arxdn/toast</h2>
       <InstallBlock packageName={lib.packageName} />
     </section>
+
+    <!-- Quick Start -->
+    <QuickStart />
 
     <!-- Interactive Playground -->
     <section id="playground" class="scroll-mt-20 pb-16">
