@@ -149,7 +149,7 @@ export class ToastManager {
         animationId = null
       }
       const elapsed = Date.now() - startTime
-      remainingTime -= elapsed
+      remainingTime = Math.max(0, remainingTime - elapsed)
     }
 
     if (toastOptions.pauseOnHover) {
