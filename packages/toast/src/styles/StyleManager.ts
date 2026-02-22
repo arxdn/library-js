@@ -72,6 +72,21 @@ ${Object.entries(POSITIONS)
   transition: all 0.3s ease-in;
 }
 
+/* Toast Type Styles */
+${Object.entries(DEFAULT_THEME)
+  .map(
+    ([type, styles]) => `
+.ui-toast.${type} {
+  background: ${styles.background};
+  color: ${styles.color};
+  ${styles.border ? `border: ${styles.border};` : ''}
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}`
+  )
+  .join('\n')}
+
 .ui-toast-icon {
   display: flex;
   align-items: center;
