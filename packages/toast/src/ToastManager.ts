@@ -209,7 +209,7 @@ export class ToastManager {
       return
     }
 
-    const { instance } = entry
+    const { instance, cleanup } = entry
 
     if (newMessage) {
       const messageEl = instance.element.querySelector('.ui-toast-message')
@@ -234,7 +234,24 @@ export class ToastManager {
         instance.element.className = [...baseClasses, ...newClasses].join(' ')
       }
 
+      const oldDuration = (instance.options as ResolvedOptions).duration
+      const oldPauseOnHover = (instance.options as ResolvedOptions).pauseOnHover
+
       Object.assign(instance.options, newOptions)
+
+      const newDuration = (instance.options as ResolvedOptions).duration
+      const newPauseOnHover = (instance.options as ResolvedOptions).pauseOnHover
+
+      if (newDuration !== oldDuration || newPauseOnHover !== oldPauseOnHover) {
+        cleanup()
+        this.cleanupFns.delete(id)
+
+        const resolvedDuration = newDuration ?? DEFAULT_OPTIONS.duration
+        if (resolvedDuration > 0) {
+          const newCleanup = this.setupAutoDismiss(id, instance)
+          entry.cleanup = newCleanup
+        }
+      }
     }
   }
 
