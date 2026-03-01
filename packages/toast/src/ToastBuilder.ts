@@ -71,7 +71,7 @@ export class ToastBuilder {
       iconEl.innerHTML = options.icon
       parts.icon = iconEl
       parts.container.appendChild(iconEl)
-    } else if (options.type !== TYPES.DEFAULT && !options.className) {
+    } else if (options.type !== TYPES.DEFAULT) {
       const iconEl = document.createElement('span')
       iconEl.className = 'ui-toast-icon'
       iconEl.innerHTML = getDefaultIcon(options.type)
