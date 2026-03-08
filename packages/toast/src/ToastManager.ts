@@ -265,4 +265,24 @@ export class ToastManager {
   }
 }
 
-export const toastManager = new ToastManager()
+let _instance: ToastManager | null = null
+
+function getManager(): ToastManager {
+  if (!_instance) {
+    _instance = new ToastManager()
+  }
+  return _instance
+}
+
+export { getManager as getToastManager }
+
+export const toastManager: ToastManager = new Proxy({} as ToastManager, {
+  get(_target, prop) {
+    const instance = getManager()
+    const value = (instance as any)[prop]
+    if (typeof value === 'function') {
+      return value.bind(instance)
+    }
+    return value
+  },
+})
