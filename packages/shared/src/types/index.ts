@@ -11,5 +11,5 @@ export interface IdGenerator {
 
 export interface UniqueId {
   generate: IdGenerator
-  create: (prefix?: string) => void | string
+  create: (prefix?: string) => string
 }
