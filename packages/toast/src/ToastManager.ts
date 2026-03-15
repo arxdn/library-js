@@ -277,9 +277,9 @@ function getManager(): ToastManager {
 export { getManager as getToastManager }
 
 export const toastManager: ToastManager = new Proxy({} as ToastManager, {
-  get(_target, prop) {
+  get(_target, prop: string | symbol) {
     const instance = getManager()
-    const value = (instance as any)[prop]
+    const value = Reflect.get(instance, prop, instance)
     if (typeof value === 'function') {
       return value.bind(instance)
     }

@@ -35,10 +35,7 @@ export function sanitizeHtml(html: string): string {
 
   doc.querySelectorAll('*').forEach(el => {
     Array.from(el.attributes).forEach(attr => {
-      if (
-        attr.name.startsWith('on') ||
-        attr.value.toLowerCase().includes('javascript:')
-      ) {
+      if (attr.name.startsWith('on') || attr.value.toLowerCase().includes('javascript:')) {
         el.removeAttribute(attr.name)
       }
     })
