@@ -221,15 +221,11 @@ export class ToastManager {
 
     if (newOptions) {
       if (newOptions.className) {
-        const existingClasses = Array.from(instance.element.classList)
-        const baseClasses = existingClasses.filter(
-          cls =>
-            cls === 'ui-toast' ||
-            cls === 'ui-toast-icon' ||
-            cls === 'ui-toast-message' ||
-            cls === 'ui-toast-close' ||
-            cls === 'ui-toast-progress'
-        )
+        const baseClasses = ['ui-toast']
+        const typeClass = (instance.options as ResolvedOptions).type
+        if (typeClass && typeClass !== 'default') {
+          baseClasses.push(typeClass)
+        }
         const newClasses = newOptions.className.split(' ').filter(c => c.trim())
         instance.element.className = [...baseClasses, ...newClasses].join(' ')
       }
