@@ -5,9 +5,13 @@ export class StyleManager {
   private static readonly STYLE_ID = 'toast-default-styles'
 
   static injectDefaultStyles(): void {
-    if (this.stylesInjected) return
-    this.stylesInjected = true
+    const existing = document.getElementById(this.STYLE_ID)
+    if (existing) {
+      this.stylesInjected = true
+      return
+    }
 
+    this.stylesInjected = true
     const styles = this.generateStyles()
 
     const styleElement = document.createElement('style')
