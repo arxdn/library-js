@@ -134,7 +134,6 @@ ${Object.entries(DEFAULT_THEME)
   left: 0;
   height: 3px;
   background: rgba(0, 0, 0, 0.1);
-  transition: width linear;
 }
 
 /* Responsive design */
