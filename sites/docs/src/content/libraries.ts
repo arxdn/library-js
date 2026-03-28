@@ -1,8 +1,11 @@
 import { readFileSync } from 'fs'
-import { resolve } from 'path'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 function readPackageVersion(packageDir: string): string {
-  const pkgPath = resolve('../../packages', packageDir, 'package.json')
+  const pkgPath = resolve(__dirname, '../../../../packages', packageDir, 'package.json')
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'))
   return pkg.version
 }
