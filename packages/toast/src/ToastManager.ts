@@ -222,10 +222,6 @@ export class ToastManager {
     if (newOptions) {
       if (newOptions.className) {
         const baseClasses = ['ui-toast']
-        const typeClass = (instance.options as ResolvedOptions).type
-        if (typeClass && typeClass !== 'default') {
-          baseClasses.push(typeClass)
-        }
         const newClasses = newOptions.className.split(' ').filter(c => c.trim())
         instance.element.className = [...baseClasses, ...newClasses].join(' ')
       }

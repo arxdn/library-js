@@ -47,7 +47,7 @@ export class ToastBuilder {
 
   private static applyBaseClasses(container: HTMLElement, options: BuildOptions): void {
     container.classList.add('ui-toast')
-    if (options.type !== TYPES.DEFAULT) {
+    if (options.type !== TYPES.DEFAULT && !options.className) {
       container.classList.add(options.type)
     }
   }
