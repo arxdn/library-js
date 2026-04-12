@@ -44,7 +44,7 @@ export class ToastManager {
     }
   }
 
-  getContainer(position: Position): HTMLElement {
+  private getContainer(position: Position): HTMLElement {
     const existing = this.containers.get(position)
     if (existing) {
       return existing
