@@ -1,4 +1,5 @@
 node_modules/
+package-lock.json
 dist/
 build/
 coverage/
@@ -12,3 +13,6 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
+.astro
+AGENTS.md
+

@@ -30,7 +30,9 @@ npm run typecheck
 
 ```
 ├── packages/
+│   ├── shared/         # Shared utilities
 │   └── toast/          # Toast notification library
-├── shared/              # Shared utilities
-└── package.json         # Monorepo configuration
+├── sites/
+│   └── docs/           # Documentation site
+└── package.json        # Monorepo configuration
 ```

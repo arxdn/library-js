@@ -1,5 +1,5 @@
 import { TYPES } from './constants'
-import { getDefaultIcon } from './helpers'
+import { getDefaultIcon, sanitizeHtml } from './helpers'
 import { ToastType } from './types'
 
 interface ToastElementParts {
@@ -47,7 +47,7 @@ export class ToastBuilder {
 
   private static applyBaseClasses(container: HTMLElement, options: BuildOptions): void {
     container.classList.add('ui-toast')
-    if (options.type !== TYPES.DEFAULT) {
+    if (options.type !== TYPES.DEFAULT && !options.className) {
       container.classList.add(options.type)
     }
   }
@@ -68,10 +68,10 @@ export class ToastBuilder {
     if (options.icon) {
       const iconEl = document.createElement('span')
       iconEl.className = 'ui-toast-icon'
-      iconEl.innerHTML = options.icon
+      iconEl.innerHTML = sanitizeHtml(options.icon)
       parts.icon = iconEl
       parts.container.appendChild(iconEl)
-    } else if (options.type !== TYPES.DEFAULT && !options.className) {
+    } else if (options.type !== TYPES.DEFAULT) {
       const iconEl = document.createElement('span')
       iconEl.className = 'ui-toast-icon'
       iconEl.innerHTML = getDefaultIcon(options.type)

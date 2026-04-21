@@ -44,7 +44,7 @@ export class ToastManager {
     }
   }
 
-  getContainer(position: Position): HTMLElement {
+  private getContainer(position: Position): HTMLElement {
     const existing = this.containers.get(position)
     if (existing) {
       return existing
@@ -149,7 +149,7 @@ export class ToastManager {
         animationId = null
       }
       const elapsed = Date.now() - startTime
-      remainingTime -= elapsed
+      remainingTime = Math.max(0, remainingTime - elapsed)
     }
 
     if (toastOptions.pauseOnHover) {
@@ -209,7 +209,7 @@ export class ToastManager {
       return
     }
 
-    const { instance } = entry
+    const { instance, cleanup } = entry
 
     if (newMessage) {
       const messageEl = instance.element.querySelector('.ui-toast-message')
@@ -221,20 +221,29 @@ export class ToastManager {
 
     if (newOptions) {
       if (newOptions.className) {
-        const existingClasses = Array.from(instance.element.classList)
-        const baseClasses = existingClasses.filter(
-          cls =>
-            cls === 'ui-toast' ||
-            cls === 'ui-toast-icon' ||
-            cls === 'ui-toast-message' ||
-            cls === 'ui-toast-close' ||
-            cls === 'ui-toast-progress'
-        )
+        const baseClasses = ['ui-toast']
         const newClasses = newOptions.className.split(' ').filter(c => c.trim())
         instance.element.className = [...baseClasses, ...newClasses].join(' ')
       }
 
+      const oldDuration = (instance.options as ResolvedOptions).duration
+      const oldPauseOnHover = (instance.options as ResolvedOptions).pauseOnHover
+
       Object.assign(instance.options, newOptions)
+
+      const newDuration = (instance.options as ResolvedOptions).duration
+      const newPauseOnHover = (instance.options as ResolvedOptions).pauseOnHover
+
+      if (newDuration !== oldDuration || newPauseOnHover !== oldPauseOnHover) {
+        cleanup()
+        this.cleanupFns.delete(id)
+
+        const resolvedDuration = newDuration ?? DEFAULT_OPTIONS.duration
+        if (resolvedDuration > 0) {
+          const newCleanup = this.setupAutoDismiss(id, instance)
+          entry.cleanup = newCleanup
+        }
+      }
     }
   }
 
@@ -248,4 +257,24 @@ export class ToastManager {
   }
 }
 
-export const toastManager = new ToastManager()
+let _instance: ToastManager | null = null
+
+function getManager(): ToastManager {
+  if (!_instance) {
+    _instance = new ToastManager()
+  }
+  return _instance
+}
+
+export { getManager as getToastManager }
+
+export const toastManager: ToastManager = new Proxy({} as ToastManager, {
+  get(_target, prop: string | symbol) {
+    const instance = getManager()
+    const value = Reflect.get(instance, prop, instance)
+    if (typeof value === 'function') {
+      return value.bind(instance)
+    }
+    return value
+  },
+})
