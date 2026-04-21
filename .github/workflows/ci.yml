@@ -29,8 +29,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Typecheck
-        run: npm run typecheck
-
       - name: Build Packages
         run: npm run build -w packages/shared -w packages/toast
+
+      - name: Typecheck
+        run: npm run typecheck -w packages/shared -w packages/toast
